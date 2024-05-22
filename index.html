@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F285631%2Fnotepad_icon&psig=AOvVaw1dj8cRj6zcuN6A2S3ixB96&ust=1716485119892000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKiUr6H3ooYDFQAAAAAdAAAAABAJ">
+    <title>Note Taking App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(bakun.jpg);
+        }
+        .notes-container {
+            height: 75%;
+            width: 50%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #00000096;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .note-input {
+            width: 94%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .note {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .delete-button {
+            background-color: #ff8c00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            float: right;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="notes-container">
+        <input type="text" class="note-input" id="note-input" placeholder="Add Note">
+        <div id="notes-list"></div>
+    </div>
+
+    <script>
+        const noteInput = document.getElementById('note-input');
+        const notesList = document.getElementById('notes-list');
+
+        noteInput.addEventListener('keypress', event => {
+            if (event.key === 'Enter' && noteInput.value) {
+                addNote(noteInput.value);
+                noteInput.value = '';
+            }
+        });
+
+        function addNote(note) {
+            const noteElement = document.createElement('div');
+            noteElement.className = 'note';
+            noteElement.textContent = note;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Sil';
+            deleteButton.addEventListener('click', () => {
+                notesList.removeChild(noteElement);
+            });
+
+            noteElement.appendChild(deleteButton);
+            notesList.appendChild(noteElement);
+        }
+    </script>
+</body>
+</html>
